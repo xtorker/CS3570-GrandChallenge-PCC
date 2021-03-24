@@ -1,0 +1,33 @@
+ds_rootdir: &ds_rootdir /home/chenghao/cs3570/CS3570-GrandChallenge-PCC/datasets/
+
+Debug_SNC:
+    dataset_dir: !join [*ds_rootdir, SNC_scale1024_test_sample100/04090263]
+    dataset_w_normal_dir: !join [*ds_rootdir, SNC_normal_scale1024_test_sample100/04090263]
+    test_pattern: '**/test/*.ply'
+    scale: 1024
+    color: 0
+    resolution: null
+
+Debug_SNCC:
+    dataset_dir: !join [*ds_rootdir, SNCC_scale1024_test_sample100/04090263]
+    dataset_w_normal_dir: !join [*ds_rootdir, SNCC_normal_scale1024_test_sample100/04090263]
+    test_pattern: '**/test/*.ply'
+    scale: 1024
+    color: 1
+    resolution: null
+
+Test_SNC:
+    dataset_dir: !join [*ds_rootdir, SNC_scale1024_test_sample100]
+    dataset_w_normal_dir: !join [*ds_rootdir, SNC_normal_scale1024_test_sample100]
+    test_pattern: '**/test/*.ply'
+    scale: 1024
+    color: 0
+    resolution: null
+
+Test_SNCC:
+    dataset_dir: !join [*ds_rootdir, SNCC_scale1024_test_sample100]
+    dataset_w_normal_dir: !join [*ds_rootdir, SNCC_normal_scale1024_test_sample100]
+    test_pattern: '**/test/*.ply'
+    scale: 1024
+    color: 1
+    resolution: null

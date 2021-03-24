@@ -1,0 +1,5 @@
+rootdir: /home/chenghao/cs3570/CS3570-GrandChallenge-PCC/algs/Template_CPU
+encoder: relative/path/to/compress_binary
+decoder: relative/path/to/compress_binary
+bin_suffix: .bin_suffix
+use_gpu: False

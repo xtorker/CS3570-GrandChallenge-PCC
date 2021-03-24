@@ -1,0 +1,6 @@
+python: /home/chenghao/anaconda3/envs/Template_GPU/bin/python
+rootdir: /home/chenghao/cs3570/CS3570-GrandChallenge-PCC/algs/Template_GPU
+encoder: relative/path/to/compress_script
+decoder: relative/path/to/compress_script
+bin_suffix: .bin_suffix
+use_gpu: True
