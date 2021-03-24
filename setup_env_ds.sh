@@ -8,6 +8,41 @@ if [ ! -f evaluator/mpeg-pcc-dmetric-master.tar.gz ]; then
     exit 0
 fi
 
+# check SNC_scale1024_test_sample100.tar.xz exists
+if [ ! -f datasets/SNC_scale1024_test_sample100.tar.xz ]; then
+    echo "[File not found] datasets/SNC_scale1024_test_sample100.tar.xz"
+    echo "Please download it from Google Drive (Check README again)"
+    exit 0
+fi
+
+# check SNC_normal_scale1024_test_sample100.tar.xz exists
+if [ ! -f datasets/SNC_normal_scale1024_test_sample100.tar.xz ]; then
+    echo "[File not found] datasets/SNC_normal_scale1024_test_sample100.tar.xz"
+    echo "Please download it from Google Drive (Check README again)"
+    exit 0
+fi
+
+# check SNCC_scale1024_test_sample100.tar.xz exists
+if [ ! -f datasets/SNCC_scale1024_test_sample100.tar.xz ]; then
+    echo "[File not found] datasets/SNCC_scale1024_test_sample100.tar.xz"
+    echo "Please download it from Google Drive (Check README again)"
+    exit 0
+fi
+
+# check SNCC_normal_scale1024_test_sample100.tar.xz exists
+if [ ! -f datasets/SNCC_normal_scale1024_test_sample100.tar.xz ]; then
+    echo "[File not found] datasets/SNCC_normal_scale1024_test_sample100.tar.xz"
+    echo "Please download it from Google Drive (Check README again)"
+    exit 0
+fi
+
+# check geocnn_v2_pretrained_models.tar.xz exists
+if [ ! -f algorithms/geocnn_v2_pretrained_models.tar.xz ]; then
+    echo "[File not found] algorithms/geocnn_v2_pretrained_models.tar.xz"
+    echo "Please download it from Google Drive (Check README again)"
+    exit 0
+fi
+
 # ========== In [root] ==========
 conda env create -f cfgs/conda_env/GeoCNNv2.yml
 
@@ -15,11 +50,11 @@ conda env create -f cfgs/conda_env/GeoCNNv2.yml
 
 cd datasets
 # ========== In [root]/datasets/ ==========
-wget https://drive.google.com/uc?export=download&id=
+wget https://365nthu-my.sharepoint.com/:u:/g/personal/108065520_office365_nthu_edu_tw/Eb-V8SKORXBGpoxZjLKsdLABJROIe3zjuTnq47Ob0iQFww?e=vJIw9M
 tar Jxvf SNC_scale1024_test_sample100.tar.xz
 rm SNC_scale1024_test_sample100.tar.xz
 
-wget https://drive.google.com/uc?export=download&id=
+wget https://drive.google.com/uc?export=download&confirm=YzWC&id=1ltfXcra_EOq_090u3CA4RTdw6XG5c610
 tar Jxvf SNC_normal_scale1024_test_sample100.tar.xz
 rm SNC_normal_scale1024_test_sample100.tar.xz
 cd ..
@@ -37,8 +72,8 @@ cd ../..
 
 ## GeoCNNv2
 git clone https://github.com/mauriceqch/pcc_geo_cnn_v2.git GeoCNNv2
+mv geocnn_v2_pretrained_models.tar.xz GeoCNNv2/
 cd GeoCNNv2
-wget https://drive.google.com/uc?export=download&confirm=YzWC&id=
 tar Jxvf geocnn_v2_pretrained_models.tar.xz
 rm geocnn_v2_pretrained_models.tar.xz
 cd ../..
