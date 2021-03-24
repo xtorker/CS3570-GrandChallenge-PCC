@@ -2,43 +2,43 @@
 set -euo pipefail
 
 # check mpeg-pcc-dmetric-master.tar.gz exists
-if [ ! -f evaluator/mpeg-pcc-dmetric-master.tar.gz ]; then
-    echo "[File not found] evaluator/mpeg-pcc-dmetric-master.tar.gz"
+if [ ! -f mpeg-pcc-dmetric-master.tar.gz ]; then
+    echo "[File not found] mpeg-pcc-dmetric-master.tar.gz"
     echo "Please download it from eLearn (Check README again)"
     exit 0
 fi
 
 # check SNC_scale1024_test_sample100.tar.xz exists
-if [ ! -f datasets/SNC_scale1024_test_sample100.tar.xz ]; then
-    echo "[File not found] datasets/SNC_scale1024_test_sample100.tar.xz"
+if [ ! -f SNC_scale1024_test_sample100.tar.xz ]; then
+    echo "[File not found] SNC_scale1024_test_sample100.tar.xz"
     echo "Please download it from Google Drive (Check README again)"
     exit 0
 fi
 
 # check SNC_normal_scale1024_test_sample100.tar.xz exists
-if [ ! -f datasets/SNC_normal_scale1024_test_sample100.tar.xz ]; then
-    echo "[File not found] datasets/SNC_normal_scale1024_test_sample100.tar.xz"
+if [ ! -f SNC_normal_scale1024_test_sample100.tar.xz ]; then
+    echo "[File not found] SNC_normal_scale1024_test_sample100.tar.xz"
     echo "Please download it from Google Drive (Check README again)"
     exit 0
 fi
 
 # check SNCC_scale1024_test_sample100.tar.xz exists
-if [ ! -f datasets/SNCC_scale1024_test_sample100.tar.xz ]; then
-    echo "[File not found] datasets/SNCC_scale1024_test_sample100.tar.xz"
+if [ ! -f SNCC_scale1024_test_sample100.tar.xz ]; then
+    echo "[File not found] SNCC_scale1024_test_sample100.tar.xz"
     echo "Please download it from Google Drive (Check README again)"
     exit 0
 fi
 
 # check SNCC_normal_scale1024_test_sample100.tar.xz exists
-if [ ! -f datasets/SNCC_normal_scale1024_test_sample100.tar.xz ]; then
-    echo "[File not found] datasets/SNCC_normal_scale1024_test_sample100.tar.xz"
+if [ ! -f SNCC_normal_scale1024_test_sample100.tar.xz ]; then
+    echo "[File not found] SNCC_normal_scale1024_test_sample100.tar.xz"
     echo "Please download it from Google Drive (Check README again)"
     exit 0
 fi
 
 # check geocnn_v2_pretrained_models.tar.xz exists
-if [ ! -f algorithms/geocnn_v2_pretrained_models.tar.xz ]; then
-    echo "[File not found] algorithms/geocnn_v2_pretrained_models.tar.xz"
+if [ ! -f geocnn_v2_pretrained_models.tar.xz ]; then
+    echo "[File not found] geocnn_v2_pretrained_models.tar.xz"
     echo "Please download it from Google Drive (Check README again)"
     exit 0
 fi
@@ -50,13 +50,21 @@ conda env create -f cfgs/conda_env/GeoCNNv2.yml
 
 cd datasets
 # ========== In [root]/datasets/ ==========
-wget https://365nthu-my.sharepoint.com/:u:/g/personal/108065520_office365_nthu_edu_tw/Eb-V8SKORXBGpoxZjLKsdLABJROIe3zjuTnq47Ob0iQFww?e=vJIw9M
+mv ../SNC_scale1024_test_sample100.tar.xz .
 tar Jxvf SNC_scale1024_test_sample100.tar.xz
 rm SNC_scale1024_test_sample100.tar.xz
 
-wget https://drive.google.com/uc?export=download&confirm=YzWC&id=1ltfXcra_EOq_090u3CA4RTdw6XG5c610
+mv ../SNC_normal_scale1024_test_sample100.tar.xz .
 tar Jxvf SNC_normal_scale1024_test_sample100.tar.xz
 rm SNC_normal_scale1024_test_sample100.tar.xz
+
+mv ../SNCC_scale1024_test_sample100.tar.xz .
+tar Jxvf SNCC_scale1024_test_sample100.tar.xz
+rm SNCC_scale1024_test_sample100.tar.xz
+
+mv ../SNCC_normal_scale1024_test_sample100.tar.xz .
+tar Jxvf SNCC_normal_scale1024_test_sample100.tar.xz
+rm SNCC_normal_scale1024_test_sample100.tar.xz
 cd ..
 
 
@@ -72,7 +80,7 @@ cd ../..
 
 ## GeoCNNv2
 git clone https://github.com/mauriceqch/pcc_geo_cnn_v2.git GeoCNNv2
-mv geocnn_v2_pretrained_models.tar.xz GeoCNNv2/
+mv ../geocnn_v2_pretrained_models.tar.xz GeoCNNv2/
 cd GeoCNNv2
 tar Jxvf geocnn_v2_pretrained_models.tar.xz
 rm geocnn_v2_pretrained_models.tar.xz
