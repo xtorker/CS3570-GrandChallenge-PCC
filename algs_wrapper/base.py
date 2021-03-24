@@ -141,7 +141,9 @@ class Base(metaclass=abc.ABCMeta):
         
         logger.info(f"Total count of failures: {self._failure_cnt}")
         
-        summarize_one_setup(Path(exp_dir).joinpath('evl'))
+        summarize_one_setup(
+            Path(exp_dir).joinpath('evl'), ds_cfg[ds_name]['color']
+        )
 
     def run(
             self,

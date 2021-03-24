@@ -263,17 +263,6 @@ class ViewIndependentMetrics(BaseMetrics):
                 f"Hybrid geo-color               : {found_val[13]}",
                 "\n",
             ]
-        else:
-            lines += [
-                f"----------------------------------------",
-                f"Y-CPSNR (dB)                   : Not Calculated",
-                f"U-CPSNR (dB)                   : Not Calculated",
-                f"V-CPSNR (dB)                   : Not Calculated",
-                "\n",
-                f"============== QoE Metric ==============",
-                f"Hybrid geo-color               : Not Calculated",
-                "\n",
-            ]
 
         self._results += lines
 

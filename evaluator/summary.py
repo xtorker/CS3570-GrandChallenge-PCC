@@ -16,13 +16,15 @@ logger = logging.getLogger(__name__)
 # [TODO]
 # Find a better way handle the log parsing and writing
 # Current version is hard to maintain.
-def summarize_one_setup(log_dir: Union[str, Path]) -> None:
+def summarize_one_setup(log_dir: Union[str, Path], color: int = 0) -> None:
     """Summarize the evaluation results for an experimental setup.
     
     Parameters
     ----------
     log_dir : `Union[str, Path]`
         The directory of the evaluation log files.
+    color : `int`, optional
+        1 for dataset with color, 0 otherwise. Defaults to 0.
     """
     log_files = glob_file(log_dir, '**/*.log', fullpath=True)
 
@@ -43,11 +45,14 @@ def summarize_one_setup(log_dir: Union[str, Path]) -> None:
         'Chamfer dist.              p2pl: ',
         'CD-PSNR (dB)               p2pl: ',
         'Hausdorff distance         p2pl: ',
-        'Y-CPSNR (dB)                   : ',
-        'U-CPSNR (dB)                   : ',
-        'V-CPSNR (dB)                   : ',
-        'Hybrid geo-color               : ',
     ]
+    if color == 1:
+        chosen_metrics += [
+            'Y-CPSNR (dB)                   : ',
+            'U-CPSNR (dB)                   : ',
+            'V-CPSNR (dB)                   : ',
+            'Hybrid geo-color               : ',
+        ]
 
     # escape special characters
     chosen_metrics = [re.escape(pattern) for pattern in chosen_metrics]
@@ -71,8 +76,6 @@ def summarize_one_setup(log_dir: Union[str, Path]) -> None:
                             # fix it with dict(metric, pattern)
                             found_val[idx].append(float(100))
                         elif m.group() == 'nan':
-                            found_val[idx].append(np.nan)
-                        elif m.group() == 'Not Calculated':
                             found_val[idx].append(np.nan)
                         else:
                             found_val[idx].append(float(m.group()))
@@ -113,15 +116,18 @@ def summarize_one_setup(log_dir: Union[str, Path]) -> None:
             f"avg. Chamfer dist.              p2pl: {np.mean(found_val[13])}",
             f"avg. CD-PSNR (dB)               p2pl: {np.mean(found_val[14])}",
             f"avg. Hausdorff distance         p2pl: {np.mean(found_val[15])}",
-            f"----------------------------------------",
-            f"avg. Y-CPSNR (dB)                   : {np.mean(found_val[16])}",
-            f"avg. U-CPSNR (dB)                   : {np.mean(found_val[17])}",
-            f"avg. V-CPSNR (dB)                   : {np.mean(found_val[18])}",
-            "\n",
-            f"============== QoE Metric ==============",
-            f"avg. Hybrid geo-color               : {np.mean(found_val[19])}",
-            "\n",
         ]
+        if color == 1:
+            lines += [
+                f"----------------------------------------",
+                f"avg. Y-CPSNR (dB)                   : {np.mean(found_val[16])}",
+                f"avg. U-CPSNR (dB)                   : {np.mean(found_val[17])}",
+                f"avg. V-CPSNR (dB)                   : {np.mean(found_val[18])}",
+                "\n",
+                f"============== QoE Metric ==============",
+                f"avg. Hybrid geo-color               : {np.mean(found_val[19])}",
+                "\n",
+            ]
         lines += [
             "\n",
             f"***** Standard Deviation *****",
@@ -145,14 +151,17 @@ def summarize_one_setup(log_dir: Union[str, Path]) -> None:
             f"stdev. Chamfer dist.              p2pl: {np.std(found_val[13])}",
             f"stdev. CD-PSNR (dB)               p2pl: {np.std(found_val[14])}",
             f"stdev. Hausdorff distance         p2pl: {np.std(found_val[15])}",
-            f"----------------------------------------",
-            f"stdev. Y-CPSNR (dB)                   : {np.std(found_val[16])}",
-            f"stdev. U-CPSNR (dB)                   : {np.std(found_val[17])}",
-            f"stdev. V-CPSNR (dB)                   : {np.std(found_val[18])}",
-            "\n",
-            f"============== QoE Metric ==============",
-            f"stdev. Hybrid geo-color               : {np.std(found_val[19])}",
         ]
+        if color == 1:
+            lines += [
+                f"----------------------------------------",
+                f"stdev. Y-CPSNR (dB)                   : {np.std(found_val[16])}",
+                f"stdev. U-CPSNR (dB)                   : {np.std(found_val[17])}",
+                f"stdev. V-CPSNR (dB)                   : {np.std(found_val[18])}",
+                "\n",
+                f"============== QoE Metric ==============",
+                f"stdev. Hybrid geo-color               : {np.std(found_val[19])}",
+            ]
         lines += [
             "\n",
             f"***** Maximum *****",
@@ -176,14 +185,17 @@ def summarize_one_setup(log_dir: Union[str, Path]) -> None:
             f"max. Chamfer dist.              p2pl: {np.max(found_val[13])}",
             f"max. CD-PSNR (dB)               p2pl: {np.max(found_val[14])}",
             f"max. Hausdorff distance         p2pl: {np.max(found_val[15])}",
-            f"----------------------------------------",
-            f"max. Y-CPSNR (dB)                   : {np.max(found_val[16])}",
-            f"max. U-CPSNR (dB)                   : {np.max(found_val[17])}",
-            f"max. V-CPSNR (dB)                   : {np.max(found_val[18])}",
-            "\n",
-            f"============== QoE Metric ==============",
-            f"max. Hybrid geo-color               : {np.max(found_val[19])}",
         ]
+        if color == 1:
+            lines += [
+                f"----------------------------------------",
+                f"max. Y-CPSNR (dB)                   : {np.max(found_val[16])}",
+                f"max. U-CPSNR (dB)                   : {np.max(found_val[17])}",
+                f"max. V-CPSNR (dB)                   : {np.max(found_val[18])}",
+                "\n",
+                f"============== QoE Metric ==============",
+                f"max. Hybrid geo-color               : {np.max(found_val[19])}",
+            ]
         lines += [
             "\n",
             f"***** Minimum *****",
@@ -207,14 +219,17 @@ def summarize_one_setup(log_dir: Union[str, Path]) -> None:
             f"min. Chamfer dist.              p2pl: {np.min(found_val[13])}",
             f"min. CD-PSNR (dB)               p2pl: {np.min(found_val[14])}",
             f"min. Hausdorff distance         p2pl: {np.min(found_val[15])}",
-            f"----------------------------------------",
-            f"min. Y-CPSNR (dB)                   : {np.min(found_val[16])}",
-            f"min. U-CPSNR (dB)                   : {np.min(found_val[17])}",
-            f"min. V-CPSNR (dB)                   : {np.min(found_val[18])}",
-            "\n",
-            f"============== QoE Metric ==============",
-            f"min. Hybrid geo-color               : {np.min(found_val[19])}",
         ]
+        if color == 1:
+            lines += [
+                f"----------------------------------------",
+                f"min. Y-CPSNR (dB)                   : {np.min(found_val[16])}",
+                f"min. U-CPSNR (dB)                   : {np.min(found_val[17])}",
+                f"min. V-CPSNR (dB)                   : {np.min(found_val[18])}",
+                "\n",
+                f"============== QoE Metric ==============",
+                f"min. Hybrid geo-color               : {np.min(found_val[19])}",
+            ]
         f.writelines('\n'.join(lines))
     return 0
 
