@@ -30,7 +30,9 @@ python setup.py
 ```
 Download `mpeg-pcc-dmetric-master.tar.gz` from [eLearn](https://elearn.nthu.edu.tw/mod/resource/view.php?id=31207).
 
-Put `mpeg-pcc-dmetric-master.tar.gz` in `CS3570-GrandChallenge-PCC/evalutor/`
+Download datasets and pretrained models from [Google Drive](https://drive.google.com/drive/folders/1rf088BC1oCXlLijOy39eT4DsnD_OcMsw?usp=sharing)
+
+Put all the files you downloaded under `CS3570-GrandChallenge-PCC/`
 
 ```bash=
 ./setup_env_ds.sh
