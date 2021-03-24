@@ -94,6 +94,7 @@ cd evaluator
 # MPEG pcc dmetric
 # Download mpeg-pcc-dmetric-master.tar.gz v0.13.5 
 # from http://mpegx.int-evry.fr/software/MPEG/PCC/mpeg-pcc-dmetric
+mv ../mpeg-pcc-dmetric-master.tar.gz .
 tar zxvf mpeg-pcc-dmetric-master.tar.gz
 rm mpeg-pcc-dmetric-master.tar.gz
 patch -sp0 < mpeg-pcc-dmetric.patch

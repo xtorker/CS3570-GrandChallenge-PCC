@@ -72,6 +72,8 @@ def summarize_one_setup(log_dir: Union[str, Path]) -> None:
                             found_val[idx].append(float(100))
                         elif m.group() == 'nan':
                             found_val[idx].append(np.nan)
+                        elif m.group() == 'Not Calculated':
+                            found_val[idx].append(np.nan)
                         else:
                             found_val[idx].append(float(m.group()))
 

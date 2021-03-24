@@ -76,7 +76,7 @@ class Base(metaclass=abc.ABCMeta):
                 "error occurs."
             )
         else:
-            self.debug = False
+            self._debug = False
             logger.info(
                 "Debug mode is off. Any failure during the experiments will "
                 "be counted and skipped."
