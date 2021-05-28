@@ -351,9 +351,6 @@ class Base(metaclass=abc.ABCMeta):
                 f"Check {log_file} for more informations."
             )
             
-            if gpu_queue is not None:
-                gpu_queue.put(gpu_id)
-            
             if self._debug is True:
                 raise e
             else:
@@ -362,3 +359,7 @@ class Base(metaclass=abc.ABCMeta):
         else:
             execution_time[0] = end_time - start_time
             return True
+        
+        finally:
+            if gpu_queue is not None:
+                gpu_queue.put(gpu_id)
